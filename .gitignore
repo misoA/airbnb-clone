@@ -133,5 +133,8 @@ dmypy.json
 # pytype static type analyzer
 .pytype/
 
-#pipfile lock
+# pipfile lock
 Pipfile.lock
+
+# vscode
+.vscode
