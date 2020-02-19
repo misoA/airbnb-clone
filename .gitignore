@@ -138,3 +138,6 @@ Pipfile.lock
 
 # vscode
 .vscode
+
+# etc
+*/migrations/*
