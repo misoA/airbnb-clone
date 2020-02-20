@@ -6,36 +6,27 @@ class User(AbstractUser):
 
     """ Custom User Model """
 
-    GENDER_MALE = 'male'
-    GENDER_FEMALE = 'female'
-    GENDER_OTHER = 'other'
+    GENDER_MALE = "male"
+    GENDER_FEMALE = "female"
+    GENDER_OTHER = "other"
     GENDER_CHOICES = (
-        (GENDER_MALE, 'Male'),
-        (GENDER_FEMALE, 'Female'),
-        (GENDER_OTHER, 'Other'),
+        (GENDER_MALE, "Male"),
+        (GENDER_FEMALE, "Female"),
+        (GENDER_OTHER, "Other"),
     )
 
-    LAN_ENG = 'en'
-    LAN_KOR = 'kr'
-    LAN_CHOICES = (
-        (LAN_ENG, 'English'),
-        (LAN_KOR, 'Korean')
-    )
+    LAN_ENG = "en"
+    LAN_KOR = "kr"
+    LAN_CHOICES = ((LAN_ENG, "English"), (LAN_KOR, "Korean"))
 
-    CURRENCY_USD = 'usd'
-    CURRENCY_KRW = 'krw'
-    CURRENCY_CHOICES = (
-        (CURRENCY_USD, 'USD'),
-        (CURRENCY_KRW, 'KRW')
-    )
+    CURRENCY_USD = "usd"
+    CURRENCY_KRW = "krw"
+    CURRENCY_CHOICES = ((CURRENCY_USD, "USD"), (CURRENCY_KRW, "KRW"))
 
-    avatar = models.ImageField(null=True, blank=True)
-    gender = models.CharField(choices=GENDER_CHOICES,
-                              max_length=10, null=True, blank=True)
-    bio = models.TextField(default="")
-    birthdate = models.DateField(null=True)
-    langauge = models.CharField(
-        choices=LAN_CHOICES, max_length=2, null=True, blank=True)
-    currency = models.CharField(
-        choices=CURRENCY_CHOICES, max_length=3, null=True, blank=True)
+    avatar = models.ImageField(blank=True)
+    gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
+    bio = models.TextField(blank=True)
+    birthdate = models.DateField(blank=True, null=True)
+    language = models.CharField(choices=LAN_CHOICES, max_length=2, blank=True)
+    currency = models.CharField(choices=CURRENCY_CHOICES, max_length=3, blank=True)
     superhost = models.BooleanField(default=False)
