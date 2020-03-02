@@ -141,3 +141,4 @@ Pipfile.lock
 
 # etc
 */migrations/*
+uploads/
