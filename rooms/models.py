@@ -53,8 +53,7 @@ class Photo(core_models.AbstractTimeStampedModel):
 
     caption = models.CharField(max_length=80)
     file = models.ImageField(upload_to="room_photos")
-    room = models.ForeignKey(
-        "Room", related_name="photos", on_delete=models.CASCADE)
+    room = models.ForeignKey("Room", related_name="photos", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.caption
@@ -83,12 +82,9 @@ class Room(core_models.AbstractTimeStampedModel):
     room_type = models.ForeignKey(
         "RoomType", related_name="rooms", on_delete=models.SET_NULL, null=True
     )
-    amenities = models.ManyToManyField(
-        "Amenity", related_name="rooms", blank=True)
-    facilities = models.ManyToManyField(
-        "Facility", related_name="rooms", blank=True)
-    house_rules = models.ManyToManyField(
-        "HouseRule", related_name="rooms", blank=True)
+    amenities = models.ManyToManyField("Amenity", related_name="rooms", blank=True)
+    facilities = models.ManyToManyField("Facility", related_name="rooms", blank=True)
+    house_rules = models.ManyToManyField("HouseRule", related_name="rooms", blank=True)
 
     def save(self, *args, **kwargs):
         self.city = str.capitalize(self.city)
@@ -108,3 +104,7 @@ class Room(core_models.AbstractTimeStampedModel):
                 all_rating += review.rating_average()
             return round(all_rating / len(all_reviews), 2)
         return 0
+
+    def first_photo(self):
+        (photo,) = self.photos.all()[:1]
+        return photo.file.url

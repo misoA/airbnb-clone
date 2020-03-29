@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django_countries import countries
 from django.core.paginator import Paginator
 from . import models, forms
+
 # Create your views here.
 
 
@@ -12,7 +13,7 @@ class HomeView(ListView):
     """ HomeView Definition """
 
     model = models.Room
-    paginate_by = 10
+    paginate_by = 12
     paginated_orphans = 5
     ordering = "created"
 
@@ -37,7 +38,7 @@ class SearchView(View):
     """ SearchView Definition """
 
     def get(self, request):
-        country = request.GET.get('country')
+        country = request.GET.get("country")
         if country:
             form = forms.SearchForm(request.GET)
             if form.is_valid():
@@ -91,15 +92,16 @@ class SearchView(View):
                 for facility in facilities:
                     filter_args["facilities"] = facility
 
-                qs = models.Room.objects.filter(
-                    **filter_args).order_by('-created')
+                qs = models.Room.objects.filter(**filter_args).order_by("-created")
 
                 paginator = Paginator(qs, 10, orphans=5)
 
-                page = request.GET.get('page', 1)
+                page = request.GET.get("page", 1)
 
                 rooms = paginator.get_page(page)
-                return render(request, "rooms/search.html", {"form": form, "rooms": rooms})
+                return render(
+                    request, "rooms/search.html", {"form": form, "rooms": rooms}
+                )
         else:
             form = forms.SearchForm()
         return render(request, "rooms/search.html", {"form": form})
