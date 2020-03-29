@@ -7,7 +7,7 @@
     "url": "git+https://github.com/misoA/airbnb-clone.git"
   },
   "scripts": {
-    "css" : "gulp"
+    "css": "gulp"
   },
   "homepage": "https://github.com/misoA/airbnb-clone#readme",
   "devDependencies": {
